@@ -9,7 +9,7 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const auth = getAuth();
+    /*const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         dispatch(setAuthState(true));
@@ -26,7 +26,7 @@ const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
       }
     });
 
-    return () => unsubscribe();
+    return () => unsubscribe();*/
   }, [dispatch]);
 
   return <>{children}</>;

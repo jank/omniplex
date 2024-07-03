@@ -2,7 +2,8 @@ import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: "http://localhost:11434/v1/",
+  apiKey: "left empty", //process.env.OPENAI_API_KEY,
 });
 
 export const runtime = "edge";
@@ -20,7 +21,7 @@ export async function POST(req: Request) {
 
   const response = await openai.chat.completions.create({
     stream: true,
-    model: model,
+    model: "gemma:2b",
     temperature: temperature,
     max_tokens: max_tokens,
     top_p: top_p,
