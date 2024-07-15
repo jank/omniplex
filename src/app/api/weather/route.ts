@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const OPENWEATHERMAP_API_KEY = process.env.OPENWEATHERMAP_API_KEY;
-const GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct";
+const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY;
+const GEOCODING_URL = "https://geocode.maps.co/search";
 const CURRENT_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
 const FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
@@ -40,7 +41,7 @@ export async function GET(req: NextRequest) {
     const geoResponse = await fetch(
       `${GEOCODING_URL}?q=${encodeURIComponent(
         city
-      )}&limit=1&appid=${OPENWEATHERMAP_API_KEY}`,
+      )}&limit=1&api_key=${GEOCODE_API_KEY}`,
       { method: "GET" }
     );
 
@@ -57,7 +58,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const { name: cityName, lat, lon } = geoData[0];
+    const { display_name: cityName, lat, lon } = geoData[0];
 
     const currentWeatherResponse = await fetch(
       `${CURRENT_WEATHER_URL}?lat=${lat}&lon=${lon}&units=metric&appid=${OPENWEATHERMAP_API_KEY}`,
